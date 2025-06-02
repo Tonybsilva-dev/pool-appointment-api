@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { baseValidator } from '@/core/validators/';
 import { z } from 'zod';
 
 const createUserSchema = z.object({
@@ -8,7 +8,4 @@ const createUserSchema = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE', 'BLOCKED', 'PENDING'])
 });
 
-export function validateCreateUser(req: Request, res: Response, next: NextFunction) {
-  req.body = createUserSchema.parse(req.body);
-  next();
-}
+export const validateCreateUser = baseValidator(createUserSchema, 'body');

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
+import { baseValidator } from './base.validator';
 
 const paginationSchema = z.object({
   page: z.coerce.number().int().positive().default(1),
@@ -8,8 +9,4 @@ const paginationSchema = z.object({
   orderDirection: z.enum(['asc', 'desc']).optional(),
 });
 
-export function validatePagination(req: Request, res: Response, next: NextFunction) {
-  const result = paginationSchema.parse(req.query);
-  req.pagination = result;
-  next();
-}
+export const validatePagination = baseValidator(paginationSchema, 'query', 'pagination');
