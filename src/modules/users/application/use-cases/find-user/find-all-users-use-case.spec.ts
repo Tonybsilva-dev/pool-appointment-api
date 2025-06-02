@@ -12,12 +12,13 @@ describe('FindAllUsersUseCase', () => {
     useCase = new FindAllUsersUseCase(repo);
   });
 
-  it('should return paginated users', async () => {
+  it('should return paginated users with total', async () => {
     await repo.create(await makeUser());
     await repo.create(await makeUser());
 
     const result = await useCase.execute({ page: 1, perPage: 10 });
 
-    expect(result.length).toBeGreaterThan(0);
+    expect(result.total).toBe(2);
+    expect(result.users).toHaveLength(2);
   });
 });

@@ -5,7 +5,7 @@ import { UserRepository } from '@/modules/users/domain/repositories/user-reposit
 export class FindAllUsersUseCase {
   constructor(private readonly userRepository: UserRepository) { }
 
-  async execute(params: PaginationParams): Promise<User[]> {
+  async execute(params: PaginationParams): Promise<{ total: number; users: User[] }> {
     return this.userRepository.findAll(params);
   }
 }

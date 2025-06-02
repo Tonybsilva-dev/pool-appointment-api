@@ -9,10 +9,6 @@ const createUserSchema = z.object({
 });
 
 export function validateCreateUser(req: Request, res: Response, next: NextFunction) {
-  try {
-    req.body = createUserSchema.parse(req.body);
-    next();
-  } catch (err) {
-    return res.status(400).json({ error: err.errors });
-  }
+  req.body = createUserSchema.parse(req.body);
+  next();
 }

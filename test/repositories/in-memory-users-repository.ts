@@ -17,10 +17,11 @@ export class InMemoryUserRepository implements UserRepository {
     return this.users.find(u => u.id.toString() === id) || null;
   }
 
-  async findAll({ page = 1, perPage = 10 }: PaginationParams): Promise<User[]> {
+  async findAll({ page = 1, perPage = 10 }: PaginationParams): Promise<{ total: number; users: User[] }> {
     const start = (page - 1) * perPage;
     const end = start + perPage;
-    return this.users.slice(start, end);
+    const users = this.users.slice(start, end);
+    return { total: this.users.length, users };
   }
 
   async update(user: User): Promise<void> {

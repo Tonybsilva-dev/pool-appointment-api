@@ -42,16 +42,21 @@ export class PrismaUserRepository implements UserRepository {
     }, new UniqueEntityID(data.id));
   }
 
-  async findAll(params: PaginationParams): Promise<User[]> {
+  async findAll(params: PaginationParams): Promise<{ total: number; users: User[] }> {
     const { skip, take } = toPrismaPagination(params);
 
-    const users = await prisma.user.findMany({
-      skip,
-      take,
-      where: { deletedAt: null },
-    });
+    const [users, total] = await Promise.all([
+      prisma.user.findMany({
+        skip,
+        take,
+        where: { deletedAt: null },
+      }),
+      prisma.user.count({
+        where: { deletedAt: null },
+      })
+    ]);
 
-    return Promise.all(
+    const mappedUsers = await Promise.all(
       users.map(async user =>
         User.create({
           name: user.name,
@@ -61,6 +66,8 @@ export class PrismaUserRepository implements UserRepository {
         }, new UniqueEntityID(user.id))
       )
     );
+
+    return { total, users: mappedUsers };
   }
 
   async update(user: User): Promise<void> {

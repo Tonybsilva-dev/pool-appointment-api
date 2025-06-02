@@ -5,9 +5,12 @@ export interface PaginationParams {
   orderDirection?: 'asc' | 'desc';
 }
 
-export function toPrismaPagination({ page = 1, perPage = 10 }: PaginationParams) {
+export function toPrismaPagination({ page = 1, perPage = 10, orderBy, orderDirection }: PaginationParams) {
   return {
     skip: (page - 1) * perPage,
     take: perPage,
+    orderBy: {
+      [orderBy ?? 'createdAt']: orderDirection ?? 'desc',
+    },
   };
 }
