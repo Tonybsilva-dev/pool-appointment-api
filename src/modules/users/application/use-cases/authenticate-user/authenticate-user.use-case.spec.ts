@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { AuthenticateUserUseCase } from '@/modules/users/application/use-cases/authenticate-user/authenticate-user-use-case';
 import { User } from '@/modules/users/domain/entities/user';
-import { UserRepository } from '@/modules/users/domain/repositories/user-repository';
 import { InMemoryUserRepository } from 'test/repositories/in-memory-users-repository';
 import { Password } from '@/modules/users/domain/entities/value-objects/password';
 import { UserStatus } from '@prisma/client';
