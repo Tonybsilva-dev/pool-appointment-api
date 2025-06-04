@@ -30,8 +30,58 @@ model User {
   deletedAt DateTime?  @map("deleted_at")
 
   bookings Booking[]
+  space    Space?
 
   @@map("users")
+}
+
+model Space {
+  id          String       @id @default(uuid()) @map("id")
+  title       String       @map("title")
+  description String       @map("description")
+  photos      String[]     @map("photos")
+  hostId      String       @unique @map("host_id")
+  host        User         @relation(fields: [hostId], references: [id])
+  amenities   Amenity[]    @relation("space_amenities")
+  rules       String       @map("rules")
+  address     Address?
+  geoLocation GeoLocation?
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+  deletedAt   DateTime?    @map("deleted_at")
+
+  @@map("spaces")
+}
+
+model Address {
+  id      String  @id @default(uuid()) @map("id")
+  street  String  @map("street")
+  number  String  @map("number")
+  city    String  @map("city")
+  state   String  @map("state")
+  zipCode String  @map("zip_code")
+  space   Space?  @relation(fields: [spaceId], references: [id])
+  spaceId String? @unique @map("space_id")
+
+  @@map("addresses")
+}
+
+model GeoLocation {
+  id        String  @id @default(uuid()) @map("id")
+  latitude  Float   @map("latitude")
+  longitude Float   @map("longitude")
+  space     Space?  @relation(fields: [spaceId], references: [id])
+  spaceId   String? @unique @map("space_id")
+
+  @@map("geo_locations")
+}
+
+model Amenity {
+  id     String  @id @default(uuid()) @map("id")
+  name   String  @map("name")
+  spaces Space[] @relation("space_amenities")
+
+  @@map("amenities")
 }
 
 enum BookingStatus {

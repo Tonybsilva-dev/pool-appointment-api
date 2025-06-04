@@ -42,6 +42,7 @@ export class PrismaUserRepository implements UserRepository {
       password: await Password.create(data.password, true),
       status: data.status,
       role: data.role,
+      deletedAt: data.deletedAt || undefined,
     }, new UniqueEntityID(data.id));
   }
 
@@ -52,10 +53,20 @@ export class PrismaUserRepository implements UserRepository {
       prisma.user.findMany({
         skip,
         take,
-        where: { deletedAt: null },
+        where: {
+          OR: [
+            { deletedAt: null },
+            { status: 'ACTIVE' }
+          ]
+        },
       }),
       prisma.user.count({
-        where: { deletedAt: null },
+        where: {
+          OR: [
+            { deletedAt: null },
+            { status: 'ACTIVE' }
+          ]
+        },
       })
     ]);
 
@@ -67,6 +78,7 @@ export class PrismaUserRepository implements UserRepository {
           password: await Password.create(user.password, true),
           status: user.status,
           role: user.role,
+          deletedAt: user.deletedAt || undefined,
         }, new UniqueEntityID(user.id))
       )
     );
@@ -84,6 +96,7 @@ export class PrismaUserRepository implements UserRepository {
         status: user.status,
         role: user.role,
         updatedAt: user.updatedAt,
+        deletedAt: user.deletedAt,
       },
     });
   }

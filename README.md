@@ -15,7 +15,7 @@
 
   <p align="center">
     Appointment Service Manager System.
-    <br />
+    <br />ı
     <a href="#"><strong>Explore the docs »</strong></a>
     <br />
     <br />

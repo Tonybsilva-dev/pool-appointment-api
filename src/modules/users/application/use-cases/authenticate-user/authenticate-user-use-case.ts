@@ -16,6 +16,10 @@ export class AuthenticateUserUseCase {
       throw new Error('Invalid credentials');
     }
 
+    if (user.status === 'INACTIVE' || user.deletedAt) {
+      throw new Error('Invalid credentials');
+    }
+
     const isPasswordValid = await user.password.compare(data.password);
 
     if (!isPasswordValid) {

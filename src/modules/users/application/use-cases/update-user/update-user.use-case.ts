@@ -18,7 +18,12 @@ export class UpdateUserUseCase {
 
     if (data.name) user.updateName(data.name);
     if (data.email) user.updateEmail(data.email);
-    if (data.status) user.updateStatus(data.status);
+    if (data.status) {
+      if (data.status === 'ACTIVE' && user.status === 'INACTIVE') {
+        user.clearDeletedAt();
+      }
+      user.updateStatus(data.status);
+    }
     if (data.role) user.updateRole(data.role);
 
     await this.userRepository.update(user);

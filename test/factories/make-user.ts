@@ -28,6 +28,5 @@ export async function makeUser(overrides: MakeUserProps = {}): Promise<User> {
     password,
     status,
     role,
-    createdAt: new Date(),
   }, new UniqueEntityID(id));
 }

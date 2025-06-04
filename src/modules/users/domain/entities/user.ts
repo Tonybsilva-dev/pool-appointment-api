@@ -12,7 +12,7 @@ export type UserProps = {
   role: UserRole;
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date;
+  deletedAt?: Date | null;
 }
 
 export class User extends Entity<UserProps> {
@@ -44,8 +44,13 @@ export class User extends Entity<UserProps> {
     return this.props.updatedAt;
   }
 
-  get deletedAt(): Date | undefined {
+  get deletedAt() {
     return this.props.deletedAt;
+  }
+
+  clearDeletedAt() {
+    this.props.deletedAt = undefined;
+    this.touch();
   }
 
   private touch() {
@@ -84,6 +89,8 @@ export class User extends Entity<UserProps> {
       {
         ...props,
         createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null,
       },
       id,
     )
