@@ -13,12 +13,18 @@ enum UserStatus {
   BLOCKED
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
   id        String     @id @default(cuid()) @map("id")
   name      String     @map("name")
   email     String     @unique @map("email")
   password  String     @map("password")
   status    UserStatus @default(ACTIVE) @map("status")
+  role      UserRole   @default(USER) @map("role")
   createdAt DateTime   @default(now()) @map("created_at")
   updatedAt DateTime   @updatedAt @map("updated_at")
   deletedAt DateTime?  @map("deleted_at")

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { InMemoryUserRepository } from 'test/repositories/in-memory-users-repository';
 import { DeleteUserUseCase } from './delete-user.use-case';
 import { makeUser } from 'test/factories/make-user';
+import { InMemoryUserRepository } from 'test/repositories/in-memory-users-repository';
 
 describe('DeleteUserUseCase', () => {
   let repo: InMemoryUserRepository;
@@ -19,6 +19,8 @@ describe('DeleteUserUseCase', () => {
     await useCase.execute(user.id.toString());
 
     const deletedUser = await repo.findById(user.id.toString());
-    expect(deletedUser).toBeNull();
+    expect(deletedUser).toBeDefined();
+    expect(deletedUser?.status).toBe('INACTIVE');
+    expect(deletedUser?.deletedAt).toBeInstanceOf(Date);
   });
 });

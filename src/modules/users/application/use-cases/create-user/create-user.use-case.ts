@@ -1,6 +1,6 @@
 import { UserRepository } from '../../../domain/repositories/user-repository';
 import { User } from '../../../domain/entities/user';
-import { UserStatus } from '@prisma/client';
+import { UserStatus, UserRole } from '@prisma/client';
 import { Password } from '@/modules/users/domain/entities/value-objects/password';
 
 interface CreateUserDTO {
@@ -8,6 +8,7 @@ interface CreateUserDTO {
   email: string;
   password: string;
   status: UserStatus;
+  role: UserRole;
 }
 
 export class CreateUserUseCase {
@@ -24,6 +25,7 @@ export class CreateUserUseCase {
       email: data.email,
       password,
       status: data.status,
+      role: data.role,
     });
 
     await this.userRepository.create(user);

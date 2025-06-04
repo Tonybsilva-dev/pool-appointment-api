@@ -1,7 +1,7 @@
 import { User } from '@/modules/users/domain/entities/user';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { Password } from '@/modules/users/domain/entities/value-objects/password';
-import { UserStatus } from '@prisma/client';
+import { UserStatus, UserRole } from '@prisma/client';
 
 interface MakeUserProps {
   id?: string;
@@ -9,6 +9,7 @@ interface MakeUserProps {
   email?: string;
   password?: Password;
   status?: UserStatus;
+  role?: UserRole;
 }
 
 export async function makeUser(overrides: MakeUserProps = {}): Promise<User> {
@@ -18,6 +19,7 @@ export async function makeUser(overrides: MakeUserProps = {}): Promise<User> {
     email = 'john.doe@example.com',
     password = await Password.create('123456'),
     status = 'ACTIVE',
+    role = 'USER',
   } = overrides;
 
   return User.create({
@@ -25,6 +27,7 @@ export async function makeUser(overrides: MakeUserProps = {}): Promise<User> {
     email,
     password,
     status,
+    role,
     createdAt: new Date(),
   }, new UniqueEntityID(id));
 }

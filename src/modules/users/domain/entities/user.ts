@@ -1,7 +1,7 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Optional } from "@/core/types/optional";
-import { UserStatus } from "@prisma/client";
+import { UserStatus, UserRole } from "@prisma/client";
 import { Password } from "./value-objects/password";
 
 export type UserProps = {
@@ -9,6 +9,7 @@ export type UserProps = {
   email: string;
   password: Password;
   status: UserStatus;
+  role: UserRole;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
@@ -31,12 +32,20 @@ export class User extends Entity<UserProps> {
     return this.props.status;
   }
 
+  get role() {
+    return this.props.role;
+  }
+
   get createdAt() {
     return this.props.createdAt;
   }
 
   get updatedAt() {
     return this.props.updatedAt;
+  }
+
+  get deletedAt(): Date | undefined {
+    return this.props.deletedAt;
   }
 
   private touch() {
@@ -55,6 +64,11 @@ export class User extends Entity<UserProps> {
 
   updateStatus(status: UserStatus) {
     this.props.status = status;
+    this.touch();
+  }
+
+  updateRole(role: UserRole) {
+    this.props.role = role;
     this.touch();
   }
 

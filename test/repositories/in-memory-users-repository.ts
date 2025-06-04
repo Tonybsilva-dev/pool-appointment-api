@@ -32,7 +32,11 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async delete(id: string): Promise<void> {
-    this.users = this.users.filter(u => u.id.toString() !== id);
+    const user = await this.findById(id);
+    if (user) {
+      user.delete();
+      await this.update(user);
+    }
   }
 
   async count(): Promise<number> {

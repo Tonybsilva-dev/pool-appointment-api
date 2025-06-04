@@ -14,6 +14,7 @@ export class PrismaUserRepository implements UserRepository {
         email: user.email,
         password: user.password.value,
         status: user.status,
+        role: user.role,
       },
     });
   }
@@ -27,6 +28,7 @@ export class PrismaUserRepository implements UserRepository {
       email: data.email,
       password: await Password.create(data.password, true),
       status: data.status,
+      role: data.role,
     }, new UniqueEntityID(data.id));
   }
 
@@ -39,6 +41,7 @@ export class PrismaUserRepository implements UserRepository {
       email: data.email,
       password: await Password.create(data.password, true),
       status: data.status,
+      role: data.role,
     }, new UniqueEntityID(data.id));
   }
 
@@ -63,6 +66,7 @@ export class PrismaUserRepository implements UserRepository {
           email: user.email,
           password: await Password.create(user.password, true),
           status: user.status,
+          role: user.role,
         }, new UniqueEntityID(user.id))
       )
     );
@@ -78,13 +82,17 @@ export class PrismaUserRepository implements UserRepository {
         email: user.email,
         password: user.password.value,
         status: user.status,
-        updatedAt: new Date(),
+        role: user.role,
+        updatedAt: user.updatedAt,
       },
     });
   }
 
   async delete(id: string): Promise<void> {
-    await prisma.user.delete({ where: { id } });
+    await prisma.user.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
   }
 
   async count(): Promise<number> {
