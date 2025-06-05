@@ -54,17 +54,17 @@ export class PrismaUserRepository implements UserRepository {
         skip,
         take,
         where: {
-          OR: [
-            { deletedAt: null },
-            { status: 'ACTIVE' }
+          AND: [
+            { status: 'ACTIVE' },
+            { deletedAt: null }
           ]
         },
       }),
       prisma.user.count({
         where: {
-          OR: [
-            { deletedAt: null },
-            { status: 'ACTIVE' }
+          AND: [
+            { status: 'ACTIVE' },
+            { deletedAt: null }
           ]
         },
       })
@@ -79,6 +79,8 @@ export class PrismaUserRepository implements UserRepository {
           status: user.status,
           role: user.role,
           deletedAt: user.deletedAt || undefined,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
         }, new UniqueEntityID(user.id))
       )
     );
@@ -96,7 +98,7 @@ export class PrismaUserRepository implements UserRepository {
         status: user.status,
         role: user.role,
         updatedAt: user.updatedAt,
-        deletedAt: user.deletedAt,
+        deletedAt: user.status === 'ACTIVE' ? null : user.deletedAt,
       },
     });
   }
@@ -104,13 +106,21 @@ export class PrismaUserRepository implements UserRepository {
   async delete(id: string): Promise<void> {
     await prisma.user.update({
       where: { id },
-      data: { deletedAt: new Date() },
+      data: {
+        deletedAt: new Date(),
+        status: 'INACTIVE'
+      },
     });
   }
 
   async count(): Promise<number> {
     return prisma.user.count({
-      where: { deletedAt: null },
+      where: {
+        AND: [
+          { status: 'ACTIVE' },
+          { deletedAt: null }
+        ]
+      },
     });
   }
 }

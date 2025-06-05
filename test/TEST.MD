@@ -84,6 +84,42 @@
 #### FindAllSpacesUseCase
 - ✅ Deve listar todos os espaços
 
+### Avaliações
+
+#### CreateRatingUseCase
+- ✅ Deve criar uma nova avaliação
+- ✅ Deve criar avaliação sem comentário
+- ✅ Deve lançar erro se nota for menor que 1
+- ✅ Deve lançar erro se nota for maior que 5
+
+#### UpdateRatingUseCase
+- ✅ Deve atualizar nota da avaliação
+- ✅ Deve atualizar comentário da avaliação
+- ✅ Deve lançar erro se nota for menor que 1
+- ✅ Deve lançar erro se nota for maior que 5
+
+#### DeleteRatingUseCase
+- ✅ Deve deletar uma avaliação
+- ✅ Deve lançar erro se avaliação não existir
+
+#### FindRatingByIdUseCase
+- ✅ Deve encontrar avaliação por ID
+- ✅ Deve retornar null quando avaliação não encontrada
+
+#### FindRatingsBySpaceIdUseCase
+- ✅ Deve listar avaliações de um espaço
+- ✅ Deve retornar lista vazia quando não existem avaliações
+- ✅ Deve retornar página correta de avaliações
+
+#### FindRatingsByUserIdUseCase
+- ✅ Deve listar avaliações de um usuário
+- ✅ Deve retornar lista vazia quando não existem avaliações
+- ✅ Deve retornar página correta de avaliações
+
+#### GetSpaceAverageRatingUseCase
+- ✅ Deve retornar média das avaliações de um espaço
+- ✅ Deve retornar 0 quando não existem avaliações
+
 ## Entidades
 
 ### User
@@ -100,6 +136,13 @@
 - ✅ Deve atualizar um espaço
 - ✅ Deve deletar um espaço
 - ✅ Deve criar espaço com props customizadas
+
+### Rating
+- ✅ Deve criar uma avaliação
+- ✅ Deve atualizar nota da avaliação
+- ✅ Deve atualizar comentário da avaliação
+- ✅ Deve lançar erro se nota for inválida
+- ✅ Deve criar avaliação com props customizadas
 
 ## Repositórios
 
@@ -119,4 +162,14 @@
 - ✅ Deve listar usuários com paginação
 - ✅ Deve atualizar usuário
 - ✅ Deve deletar usuário
-- ✅ Deve contar usuários ativos e não deletados 
+- ✅ Deve contar usuários ativos e não deletados
+
+### InMemoryRatingRepository
+- ✅ Deve criar avaliação
+- ✅ Deve encontrar avaliação por ID
+- ✅ Deve listar avaliações por espaço
+- ✅ Deve listar avaliações por usuário
+- ✅ Deve atualizar avaliação
+- ✅ Deve deletar avaliação
+- ✅ Deve contar avaliações por espaço
+- ✅ Deve calcular média de avaliações por espaço 

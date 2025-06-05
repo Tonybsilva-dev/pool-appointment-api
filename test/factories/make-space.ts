@@ -8,6 +8,7 @@ interface MakeSpaceProps {
   photos?: string[];
   rules?: string;
   hostId?: string;
+  averageRating?: number;
 }
 
 export function makeSpace(overrides: MakeSpaceProps = {}): Space {
@@ -18,6 +19,7 @@ export function makeSpace(overrides: MakeSpaceProps = {}): Space {
     photos = ['photo1.jpg', 'photo2.jpg'],
     rules = 'Regras do espaço teste',
     hostId = 'host-123',
+    averageRating = 0,
   } = overrides;
 
   return Space.create({
@@ -28,5 +30,6 @@ export function makeSpace(overrides: MakeSpaceProps = {}): Space {
     hostId,
     createdAt: new Date(),
     updatedAt: new Date(),
+    averageRating,
   }, new UniqueEntityID(id));
 } 

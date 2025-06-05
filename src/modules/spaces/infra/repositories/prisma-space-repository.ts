@@ -17,6 +17,7 @@ export class PrismaSpaceRepository implements SpaceRepository {
         hostId: space.hostId,
         createdAt: space.createdAt,
         updatedAt: space.updatedAt,
+        averageRating: space.averageRating,
       }
     })
   }
@@ -34,6 +35,7 @@ export class PrismaSpaceRepository implements SpaceRepository {
         hostId: space.hostId,
         createdAt: space.createdAt,
         updatedAt: space.updatedAt,
+        averageRating: space.averageRating,
       },
       new UniqueEntityID(space.id)
     )
@@ -63,6 +65,7 @@ export class PrismaSpaceRepository implements SpaceRepository {
           hostId: space.hostId,
           createdAt: space.createdAt,
           updatedAt: space.updatedAt,
+          averageRating: space.averageRating,
         },
         new UniqueEntityID(space.id)
       )
@@ -81,6 +84,7 @@ export class PrismaSpaceRepository implements SpaceRepository {
         rules: space.rules,
         hostId: space.hostId,
         updatedAt: space.updatedAt,
+        averageRating: space.averageRating,
       }
     })
   }

@@ -1,5 +1,6 @@
 import { SpaceRepository } from "@/modules/spaces/domain/repositories/space-repository";
 import { Space } from "@/modules/spaces/domain/entities/space";
+import { PaginationParams } from "@/core/repositories/pagination-params";
 
 export class InMemorySpacesRepository implements SpaceRepository {
   public items: Space[] = [];
@@ -13,8 +14,13 @@ export class InMemorySpacesRepository implements SpaceRepository {
     return space ?? null;
   }
 
-  async findAll(): Promise<Space[]> {
-    return this.items;
+  async findAll({ page = 1, perPage = 10 }: PaginationParams): Promise<{ total: number, spaces: Space[] }> {
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+    const spaces = this.items.slice(start, end);
+    const total = this.items.length;
+
+    return { total, spaces };
   }
 
   async update(space: Space): Promise<void> {

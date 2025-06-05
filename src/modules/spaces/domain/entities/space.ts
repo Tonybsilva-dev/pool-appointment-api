@@ -10,6 +10,7 @@ export interface SpaceProps {
   hostId: string
   createdAt: Date
   updatedAt: Date
+  averageRating: number
 }
 
 export class Space extends Entity<SpaceProps> {
@@ -61,12 +62,21 @@ export class Space extends Entity<SpaceProps> {
     return this.props.updatedAt
   }
 
+  get averageRating() {
+    return this.props.averageRating
+  }
+
+  set averageRating(value: number) {
+    this.props.averageRating = value
+    this.touch()
+  }
+
   private touch() {
     this.props.updatedAt = new Date()
   }
 
   static create(
-    props: Optional<SpaceProps, 'createdAt' | 'updatedAt'>,
+    props: Optional<SpaceProps, 'createdAt' | 'updatedAt' | 'averageRating'>,
     id?: UniqueEntityID,
   ) {
     const space = new Space(
@@ -74,6 +84,7 @@ export class Space extends Entity<SpaceProps> {
         ...props,
         createdAt: props.createdAt ?? new Date(),
         updatedAt: props.updatedAt ?? new Date(),
+        averageRating: props.averageRating ?? 0,
       },
       id,
     )

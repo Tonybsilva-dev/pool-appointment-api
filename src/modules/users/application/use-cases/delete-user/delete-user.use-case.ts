@@ -8,8 +8,8 @@ export class DeleteUserUseCase {
     const user = await this.userRepository.findById(id);
     if (!user) throw new Error('User not found');
 
-    user.updateStatus('INACTIVE' as UserStatus);
     user.delete();
+    user.updateStatus('INACTIVE' as UserStatus);
 
     await this.userRepository.update(user);
   }

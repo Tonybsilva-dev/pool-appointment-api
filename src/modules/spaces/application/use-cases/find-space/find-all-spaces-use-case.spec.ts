@@ -14,8 +14,9 @@ describe('Find All Spaces Use Case', () => {
     await repository.create(space1)
     await repository.create(space2)
 
-    const spaces = await listUseCase.execute()
+    const { spaces, total } = await listUseCase.execute({ page: 1, perPage: 10 })
 
+    expect(total).toBe(2)
     expect(spaces).toHaveLength(2)
   })
 })
