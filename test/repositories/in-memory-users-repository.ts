@@ -10,7 +10,7 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.users.find(u => u.email === email) || null;
+    return this.users.find(u => u.email.toLowerCase() === email.toLowerCase()) || null;
   }
 
   async findById(id: string): Promise<User | null> {
@@ -18,10 +18,18 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async findAll({ page = 1, perPage = 10 }: PaginationParams): Promise<{ total: number; users: User[] }> {
+    const filteredUsers = this.users.filter(user =>
+      user.status === 'ACTIVE' || user.deletedAt === null
+    );
+
     const start = (page - 1) * perPage;
     const end = start + perPage;
-    const users = this.users.slice(start, end);
-    return { total: this.users.length, users };
+    const users = filteredUsers.slice(start, end);
+
+    return {
+      total: filteredUsers.length,
+      users
+    };
   }
 
   async update(user: User): Promise<void> {
@@ -32,10 +40,16 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async delete(id: string): Promise<void> {
-    this.users = this.users.filter(u => u.id.toString() !== id);
+    const user = await this.findById(id);
+    if (user) {
+      user.delete();
+      await this.update(user);
+    }
   }
 
   async count(): Promise<number> {
-    return this.users.length;
+    return this.users.filter(user =>
+      user.status === 'ACTIVE' && user.deletedAt === null
+    ).length;
   }
 }

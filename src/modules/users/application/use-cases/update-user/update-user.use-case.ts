@@ -1,11 +1,12 @@
 import { UserRepository } from "@/modules/users/domain/repositories/user-repository";
-import { UserStatus } from "@prisma/client";
+import { UserStatus, UserRole } from "@prisma/client";
 
 interface UpdateUserDTO {
   id: string;
   name?: string;
   email?: string;
-  status?: string;
+  status?: UserStatus;
+  role?: UserRole;
 }
 
 export class UpdateUserUseCase {
@@ -17,7 +18,13 @@ export class UpdateUserUseCase {
 
     if (data.name) user.updateName(data.name);
     if (data.email) user.updateEmail(data.email);
-    if (data.status) user.updateStatus(data.status as UserStatus);
+    if (data.status) {
+      if (data.status === 'ACTIVE' && user.status === 'INACTIVE') {
+        user.clearDeletedAt();
+      }
+      user.updateStatus(data.status);
+    }
+    if (data.role) user.updateRole(data.role);
 
     await this.userRepository.update(user);
   }

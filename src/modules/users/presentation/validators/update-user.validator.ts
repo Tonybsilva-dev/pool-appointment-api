@@ -6,6 +6,7 @@ const updateUserSchema = z.object({
   email: z.string().email().optional(),
   password: z.string().min(6).optional(),
   status: z.enum(['ACTIVE', 'INACTIVE', 'BLOCKED']).optional(),
+  role: z.enum(['ADMIN', 'USER']).optional(),
 });
 
 export function validateUpdateUser(req: Request, res: Response, next: NextFunction) {

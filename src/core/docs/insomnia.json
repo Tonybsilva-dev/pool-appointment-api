@@ -1,0 +1,491 @@
+type: collection.insomnia.rest/5.0
+name: pool-appointment-api
+meta:
+  id: wrk_8060e2ef4c9f4d4783927ef9da9c1268
+  created: 1748530452269
+  modified: 1748890462343
+collection:
+  - name: V1
+    meta:
+      id: fld_3ec3e9cc9e26435f8f34cd750ea60ad1
+      created: 1748530461258
+      modified: 1748530461258
+      sortKey: -1748530461258
+    children:
+      - name: Users
+        meta:
+          id: fld_84a48f12ebb64a73aea8f35b309f0a3a
+          created: 1748530560690
+          modified: 1749151431235
+          sortKey: -1749061323896
+        children:
+          - url: "{{ _.BASE_URL }}/users"
+            name: Create User
+            meta:
+              id: req_820113979dbc45b6a8d410e752933c23
+              created: 1748530571956
+              modified: 1749151329053
+              isPrivate: false
+              sortKey: -1748892502285
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"name": "John Doe",
+                	"email": "john@example.com",
+                	"password": "123456",
+                	"status": "ACTIVE",
+                	"role": "USER"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.BASE_URL }}/users"
+            name: List Users
+            meta:
+              id: req_35c77aa7ad5542b38b04312d1da7d320
+              created: 1748891959815
+              modified: 1749151324338
+              isPrivate: false
+              sortKey: -1748892502185
+            method: GET
+            parameters:
+              - id: pair_02b54d54d2174fbfab07a075bdd2368a
+                name: page
+                value: "1"
+                disabled: false
+              - id: pair_799e574e61a54fe98676eedd5dc32745
+                name: perPage
+                value: "10"
+                disabled: false
+              - id: pair_a79a2567b44e405f9d83e328c54b7876
+                name: orderBy
+                disabled: false
+              - id: pair_13996c9b03354cfb8cdde243739349cc
+                name: orderDirection
+                value: asc
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.BASE_URL }}/users/:id"
+            name: Get User By Id
+            meta:
+              id: req_ff9c97031a96495c93774be780d71c95
+              created: 1748892244415
+              modified: 1749151338751
+              isPrivate: false
+              sortKey: -1748892244415
+            method: GET
+            parameters:
+              - id: pair_2ef7f69b572a4ece82add46fdcfce1d1
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: 59195c9b-8efd-43f8-be21-8e6a1c1b898c
+          - url: "{{ _.BASE_URL }}/users/:id"
+            name: Delete User
+            meta:
+              id: req_4ec86b27b8934c2d855dd8df2e3e8a2b
+              created: 1748892260094
+              modified: 1749151346946
+              isPrivate: false
+              sortKey: -1748892102115
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: 59195c9b-8efd-43f8-be21-8e6a1c1b898c
+          - url: "{{ _.BASE_URL }}/users/:id"
+            name: Update User
+            meta:
+              id: req_45f1f1042e3e436d8785711d43a6b330
+              created: 1748892502085
+              modified: 1749151342683
+              isPrivate: false
+              sortKey: -1748892173265
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"status": "ACTIVE"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: c60e6ac3-e8ad-4e7d-90d6-fc52d9a4560b
+      - name: Spaces
+        meta:
+          id: fld_7e3ca131d9684767955effc820b32b26
+          created: 1749061323721
+          modified: 1749151428102
+          sortKey: -1749061323871
+        children:
+          - url: "{{ _.BASE_URL }}/spaces"
+            name: List Spaces
+            meta:
+              id: req_2cbd98c53a1f4bb7bbe02c49b917f9dd
+              created: 1749061378512
+              modified: 1749151357203
+              isPrivate: false
+              sortKey: -1749062213608.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.BASE_URL }}/spaces/:id"
+            name: Get Space By Id
+            meta:
+              id: req_6ffe4d2cdad84b7084580e03af291cef
+              created: 1749062186544
+              modified: 1749151363174
+              isPrivate: false
+              sortKey: -1749062186544
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: c1a6bf85-c81f-4058-ba80-e4bce8de3187
+          - url: "{{ _.BASE_URL }}/spaces/:id"
+            name: Delete Space
+            meta:
+              id: req_6c376587971c46b7939f45680ceafd46
+              created: 1749062231149
+              modified: 1749151374206
+              isPrivate: false
+              sortKey: -1749061782528
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: c1a6bf85-c81f-4058-ba80-e4bce8de3187
+          - url: "{{ _.BASE_URL }}/spaces"
+            name: Create Space
+            meta:
+              id: req_0403d4d70572465f92c726313c145491
+              created: 1749062240673
+              modified: 1749151352788
+              isPrivate: false
+              sortKey: -1749062240673
+            method: POST
+            body:
+              mimeType: application/json
+              text: >-
+                {
+                  "title": "Piscina Azul do Recanto",
+                  "description": "Espaço com piscina ampla, churrasqueira e área verde. Ideal para festas e eventos.",
+                  "photos": [
+                    "https://example.com/foto1.jpg",
+                    "https://example.com/foto2.jpg"
+                  ],
+                  "rules": "Proibido som alto após as 22h. Uso obrigatório de traje de banho.",
+                  "hostId": "59195c9b-8efd-43f8-be21-8e6a1c1b898c", 
+                  "address": {
+                    "street": "Rua das Palmeiras",
+                    "number": "123",
+                    "city": "Campina Grande",
+                    "state": "PB",
+                    "zipCode": "58400-000"
+                  },
+                  "geoLocation": {
+                    "latitude": -7.2307,
+                    "longitude": -35.8811
+                  },
+                  "amenities": [
+                    "Churrasqueira",
+                    "Wi-Fi",
+                    "Estacionamento",
+                    "Cadeiras de Sol"
+                  ]
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.BASE_URL }}/spaces/:id"
+            name: Update Space
+            meta:
+              id: req_31c09ea201ec45c8bb89a216167f4f56
+              created: 1749062291909
+              modified: 1749151368887
+              isPrivate: false
+              sortKey: -1749061883532
+            method: PUT
+            body:
+              mimeType: application/json
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+      - name: Ratings
+        meta:
+          id: fld_6eaab9d1ae7d49e09ae02aa63855e57c
+          created: 1749150155077
+          modified: 1749151395137
+          sortKey: -1749061323771
+        children:
+          - url: "{{ _.BASE_URL }}/spaces/:spaceId/ratings"
+            name: Create Rating
+            meta:
+              id: req_14808e065c764254a70131888c451be1
+              created: 1749151434597
+              modified: 1749151522946
+              isPrivate: false
+              sortKey: -1749151517564
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"userId": "user-123",
+                	"score": 5,
+                	"comment": "Ótimo espaço!"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: spaceId
+          - url: "{{ _.BASE_URL }}/spaces/:spaceId/ratings"
+            name: List Rating By Space
+            meta:
+              id: req_e25be70d51df416490264b7019745894
+              created: 1749151517464
+              modified: 1749151537804
+              isPrivate: false
+              sortKey: -1749151517464
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: spaceId
+          - url: "{{ _.BASE_URL }}/spaces/:userId/ratings"
+            name: List Rating By User
+            meta:
+              id: req_431663fffe7b48babc41c6ea37609095
+              created: 1749151555921
+              modified: 1749151560399
+              isPrivate: false
+              sortKey: -1749151013434.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: userId
+          - url: "{{ _.BASE_URL }}/ratings/:id"
+            name: Delete Rating
+            meta:
+              id: req_d4507fd6cc044b298d193105ab31bf26
+              created: 1749151592326
+              modified: 1749151622441
+              isPrivate: false
+              sortKey: -1749151013234.5
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+          - url: "{{ _.BASE_URL }}/ratings/:id"
+            name: Update Rating
+            meta:
+              id: req_49d53106d96440b7824f12d9a233cd94
+              created: 1749151617560
+              modified: 1749151644793
+              isPrivate: false
+              sortKey: -1749151013334.5
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"score": 4,
+                	"comment": "Espaço atualizado!"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+      - url: "{{ _.BASE_URL }}/status"
+        name: Status
+        meta:
+          id: req_6ad1948a50bb4ad19a2d0b93542c6404
+          created: 1748530468978
+          modified: 1749061328205
+          isPrivate: false
+          sortKey: -1749061323921
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_920019fae7bf7cda4fbb7ee55afa03c6229afdd3
+    created: 1748530452289
+    modified: 1748530452289
+environments:
+  name: Base Environment
+  meta:
+    id: env_920019fae7bf7cda4fbb7ee55afa03c6229afdd3
+    created: 1748530452287
+    modified: 1748874469123
+    isPrivate: false
+  data:
+    BASE_URL: http://localhost:3000/api

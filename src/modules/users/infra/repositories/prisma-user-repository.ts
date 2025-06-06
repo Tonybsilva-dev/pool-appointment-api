@@ -14,6 +14,7 @@ export class PrismaUserRepository implements UserRepository {
         email: user.email,
         password: user.password.value,
         status: user.status,
+        role: user.role,
       },
     });
   }
@@ -27,6 +28,7 @@ export class PrismaUserRepository implements UserRepository {
       email: data.email,
       password: await Password.create(data.password, true),
       status: data.status,
+      role: data.role,
     }, new UniqueEntityID(data.id));
   }
 
@@ -39,6 +41,8 @@ export class PrismaUserRepository implements UserRepository {
       email: data.email,
       password: await Password.create(data.password, true),
       status: data.status,
+      role: data.role,
+      deletedAt: data.deletedAt || undefined,
     }, new UniqueEntityID(data.id));
   }
 
@@ -49,10 +53,20 @@ export class PrismaUserRepository implements UserRepository {
       prisma.user.findMany({
         skip,
         take,
-        where: { deletedAt: null },
+        where: {
+          AND: [
+            { status: 'ACTIVE' },
+            { deletedAt: null }
+          ]
+        },
       }),
       prisma.user.count({
-        where: { deletedAt: null },
+        where: {
+          AND: [
+            { status: 'ACTIVE' },
+            { deletedAt: null }
+          ]
+        },
       })
     ]);
 
@@ -63,6 +77,10 @@ export class PrismaUserRepository implements UserRepository {
           email: user.email,
           password: await Password.create(user.password, true),
           status: user.status,
+          role: user.role,
+          deletedAt: user.deletedAt || undefined,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
         }, new UniqueEntityID(user.id))
       )
     );
@@ -78,18 +96,31 @@ export class PrismaUserRepository implements UserRepository {
         email: user.email,
         password: user.password.value,
         status: user.status,
-        updatedAt: new Date(),
+        role: user.role,
+        updatedAt: user.updatedAt,
+        deletedAt: user.status === 'ACTIVE' ? null : user.deletedAt,
       },
     });
   }
 
   async delete(id: string): Promise<void> {
-    await prisma.user.delete({ where: { id } });
+    await prisma.user.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        status: 'INACTIVE'
+      },
+    });
   }
 
   async count(): Promise<number> {
     return prisma.user.count({
-      where: { deletedAt: null },
+      where: {
+        AND: [
+          { status: 'ACTIVE' },
+          { deletedAt: null }
+        ]
+      },
     });
   }
 }

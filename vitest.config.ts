@@ -11,6 +11,7 @@ export default defineConfig({
       exclude: [
         'test/setup.ts', // setup de testes
         '**/index.ts', // arquivos que apenas reexportam
+        '**/src/@types/**',
         '**/esbuild.config.js',
         '**/vitest.config.ts',
         '**/src/index.ts',
@@ -18,10 +19,11 @@ export default defineConfig({
         '**/core/routes/**',
         '**/core/types/**',
         '**/core/middlewares/error-handling.ts',
-        '**/infra/repositories/prisma-user-repository.ts', // se você só quiser testar com in-memory
+        '**/infra/repositories/prisma-user-repository.ts',
         '**/presentation/controllers/**',
         '**/presentation/routes/**',
         '**/presentation/validators/**',
+        '**/presentation/doc/**',
       ],
     },
   },
