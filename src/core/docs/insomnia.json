@@ -322,15 +322,15 @@ collection:
         meta:
           id: fld_6eaab9d1ae7d49e09ae02aa63855e57c
           created: 1749150155077
-          modified: 1749151395137
-          sortKey: -1749061323771
+          modified: 1750268007135
+          sortKey: -1749061323846
         children:
-          - url: "{{ _.BASE_URL }}/spaces/:spaceId/ratings"
+          - url: "{{ _.BASE_URL }}/ratings"
             name: Create Rating
             meta:
               id: req_14808e065c764254a70131888c451be1
               created: 1749151434597
-              modified: 1749151522946
+              modified: 1749152404728
               isPrivate: false
               sortKey: -1749151517564
             method: POST
@@ -338,7 +338,8 @@ collection:
               mimeType: application/json
               text: |-
                 {
-                	"userId": "user-123",
+                	"spaceId": "f804f337-551e-49cd-964c-6a4d5a1b4e49",
+                	"userId": "bbbc8aea-f0b1-424a-af9b-bc749f9fb777",
                 	"score": 5,
                 	"comment": "Ótimo espaço!"
                 }
@@ -355,14 +356,12 @@ collection:
                 send: true
                 store: true
               rebuildPath: true
-            pathParameters:
-              - name: spaceId
-          - url: "{{ _.BASE_URL }}/spaces/:spaceId/ratings"
+          - url: "{{ _.BASE_URL }}/ratings/space/:spaceId"
             name: List Rating By Space
             meta:
               id: req_e25be70d51df416490264b7019745894
               created: 1749151517464
-              modified: 1749151537804
+              modified: 1749153089718
               isPrivate: false
               sortKey: -1749151517464
             method: GET
@@ -379,12 +378,13 @@ collection:
               rebuildPath: true
             pathParameters:
               - name: spaceId
-          - url: "{{ _.BASE_URL }}/spaces/:userId/ratings"
+                value: f804f337-551e-49cd-964c-6a4d5a1b4e49
+          - url: "{{ _.BASE_URL }}/ratings/user/:userId"
             name: List Rating By User
             meta:
               id: req_431663fffe7b48babc41c6ea37609095
               created: 1749151555921
-              modified: 1749151560399
+              modified: 1749153129126
               isPrivate: false
               sortKey: -1749151013434.5
             method: GET
@@ -401,12 +401,13 @@ collection:
               rebuildPath: true
             pathParameters:
               - name: userId
+                value: bbbc8aea-f0b1-424a-af9b-bc749f9fb777
           - url: "{{ _.BASE_URL }}/ratings/:id"
             name: Delete Rating
             meta:
               id: req_d4507fd6cc044b298d193105ab31bf26
               created: 1749151592326
-              modified: 1749151622441
+              modified: 1749153247389
               isPrivate: false
               sortKey: -1749151013234.5
             method: DELETE
@@ -423,12 +424,13 @@ collection:
               rebuildPath: true
             pathParameters:
               - name: id
+                value: 4c9217e7-3aac-4f56-ad47-a70d46880489
           - url: "{{ _.BASE_URL }}/ratings/:id"
             name: Update Rating
             meta:
               id: req_49d53106d96440b7824f12d9a233cd94
               created: 1749151617560
-              modified: 1749151644793
+              modified: 1749153243071
               isPrivate: false
               sortKey: -1749151013334.5
             method: PUT
@@ -454,6 +456,195 @@ collection:
               rebuildPath: true
             pathParameters:
               - name: id
+                value: 4c9217e7-3aac-4f56-ad47-a70d46880489
+          - url: "{{ _.BASE_URL }}/ratings/:id/"
+            name: Get Rating By Id
+            meta:
+              id: req_a7a315389b024b9f8f3c3c04e0b0392d
+              created: 1749152646826
+              modified: 1749153231592
+              isPrivate: false
+              sortKey: -1749151517514
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: 4c9217e7-3aac-4f56-ad47-a70d46880489
+      - name: Appointments
+        meta:
+          id: fld_eef95f47fbf34033ae3bfe2db785c9c6
+          created: 1750267994914
+          modified: 1750268005084
+          sortKey: -1749061323821
+        children:
+          - url: "{{ _.BASE_URL }}/appointments"
+            name: Create Appointment
+            meta:
+              id: req_69cddc57c3a0402daf5f8b1ba7788e2f
+              created: 1750268012819
+              modified: 1750268397697
+              isPrivate: false
+              sortKey: -1750268012819
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "userId": "bbbc8aea-f0b1-424a-af9b-bc749f9fb777",
+                  "spaceId": "f804f337-551e-49cd-964c-6a4d5a1b4e49",
+                  "date": "2025-06-19T17:36:09.663Z",
+                  "startTime": "2025-06-19T09:00:00.663Z",
+                  "endTime": "2025-06-19T20:30:00.663Z"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.BASE_URL }}/appointments/:id"
+            name: Get Appointment By Id
+            meta:
+              id: req_4d27b5cfdf484a3ea37d1b993a489284
+              created: 1750268422504
+              modified: 1750268578895
+              isPrivate: false
+              sortKey: -1750268012769
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: 5c800c5b-77e0-4276-aeb0-f9e783af1781
+          - url: "{{ _.BASE_URL }}/appointment/:id"
+            name: Delete Appointment
+            meta:
+              id: req_a71a68698de14545ad101c755af32b6a
+              created: 1750268443340
+              modified: 1750268462210
+              isPrivate: false
+              sortKey: -1750268012719
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: c1a6bf85-c81f-4058-ba80-e4bce8de3187
+          - url: "{{ _.BASE_URL }}/appointments/:id"
+            name: Update Appointment
+            meta:
+              id: req_defa0d2eaf57405eaaf22cf19379ca47
+              created: 1750268527065
+              modified: 1750268643958
+              isPrivate: false
+              sortKey: -1750268012744
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "date": "2025-06-18T17:43:58.696Z",
+                  "startTime": "2025-06-18T17:43:58.696Z",
+                  "endTime": "2025-06-18T17:43:58.696Z",
+                  "status": "PENDING"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: f804f337-551e-49cd-964c-6a4d5a1b4e49
+          - url: "{{ _.BASE_URL }}/appointments/space/:id"
+            name: Get Appointment By Space Id
+            meta:
+              id: req_1628ad06ad214f2384bbbcda4e7f1a43
+              created: 1750268551887
+              modified: 1750268626034
+              isPrivate: false
+              sortKey: -1750268012756.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: f804f337-551e-49cd-964c-6a4d5a1b4e49
+          - url: "{{ _.BASE_URL }}/appointments/space/:id"
+            name: Get Appointment By User Id
+            meta:
+              id: req_cf0a880f8617437b91cb77eb39fa4a6f
+              created: 1750268565843
+              modified: 1750268589042
+              isPrivate: false
+              sortKey: -1750268012750.25
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: bbbc8aea-f0b1-424a-af9b-bc749f9fb777
       - url: "{{ _.BASE_URL }}/status"
         name: Status
         meta:
