@@ -1,9 +1,27 @@
 /**
- * @route GET /api/ratings/user/:userId
- * @summary Lista avaliações feitas por um usuário
- * @tags Ratings
- * @param {string} userId.path.required - ID do usuário
- * @param {number} page.query.optional - Página (default: 1)
- * @param {number} perPage.query.optional - Itens por página (default: 10)
- * @response 200 - Lista de avaliações
- */ 
+ * @swagger
+ * /ratings/user/{userId}:
+ *   get:
+ *     summary: Lista avaliações de um usuário
+ *     tags: [Ratings]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do usuário
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: number
+ *         description: "Página (default: 1)"
+ *       - in: query
+ *         name: perPage
+ *         schema:
+ *           type: number
+ *         description: "Itens por página (default: 10)"
+ *     responses:
+ *       200:
+ *         description: Lista de avaliações
+ */

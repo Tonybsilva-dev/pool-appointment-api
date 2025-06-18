@@ -19,7 +19,7 @@ export class InMemoryUserRepository implements UserRepository {
 
   async findAll({ page = 1, perPage = 10 }: PaginationParams): Promise<{ total: number; users: User[] }> {
     const filteredUsers = this.users.filter(user =>
-      user.status === 'ACTIVE' || user.deletedAt === null
+      user.status === 'ACTIVE' && user.deletedAt === null
     );
 
     const start = (page - 1) * perPage;

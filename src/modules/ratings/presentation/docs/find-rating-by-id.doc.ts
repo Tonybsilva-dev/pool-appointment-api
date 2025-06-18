@@ -1,8 +1,19 @@
 /**
- * @route GET /api/ratings/:id
- * @summary Busca uma avaliação pelo ID
- * @tags Ratings
- * @param {string} id.path.required - ID da avaliação
- * @response 200 - Avaliação encontrada
- * @response 404 - Avaliação não encontrada
+ * @swagger
+ * /ratings/{id}:
+ *   get:
+ *     summary: Busca uma avaliação pelo ID
+ *     tags: [Ratings]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID da avaliação
+ *     responses:
+ *       200:
+ *         description: Avaliação encontrada
+ *       404:
+ *         description: Avaliação não encontrada
  */ 

@@ -1,9 +1,27 @@
 /**
- * @route GET /api/ratings/space/:spaceId
- * @summary Lista avaliações de um espaço
- * @tags Ratings
- * @param {string} spaceId.path.required - ID do espaço
- * @param {number} page.query.optional - Página (default: 1)
- * @param {number} perPage.query.optional - Itens por página (default: 10)
- * @response 200 - Lista de avaliações
- */ 
+ * @swagger
+ * /ratings/space/{spaceId}:
+ *   get:
+ *     summary: Lista avaliações de um espaço
+ *     tags: [Ratings]
+ *     parameters:
+ *       - in: path
+ *         name: spaceId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do espaço
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: number
+ *         description: "Página (default: 1)"
+ *       - in: query
+ *         name: perPage
+ *         schema:
+ *           type: number
+ *         description: "Itens por página (default: 10)"
+ *     responses:
+ *       200:
+ *         description: Lista de avaliações
+ */
