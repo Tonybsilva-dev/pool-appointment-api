@@ -14,7 +14,7 @@ export class InMemoryRatingRepository implements RatingRepository {
     return rating ?? null;
   }
 
-  async findBySpaceId(spaceId: string, { page, perPage }: PaginationParams) {
+  async findBySpaceId(spaceId: string, { page = 1, perPage = 10 }: PaginationParams) {
     const ratings = this.items
       .filter(item => item.spaceId === spaceId)
       .slice((page - 1) * perPage, page * perPage);
@@ -27,7 +27,7 @@ export class InMemoryRatingRepository implements RatingRepository {
     };
   }
 
-  async findByUserId(userId: string, { page, perPage }: PaginationParams) {
+  async findByUserId(userId: string, { page = 1, perPage = 10 }: PaginationParams) {
     const ratings = this.items
       .filter(item => item.userId === userId)
       .slice((page - 1) * perPage, page * perPage);

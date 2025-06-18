@@ -29,29 +29,30 @@ model User {
   updatedAt DateTime   @updatedAt @map("updated_at")
   deletedAt DateTime?  @map("deleted_at")
 
-  bookings Booking[]
-  space    Space?
-  Rating   Rating[]
+  appointments Appointment[]
+  space        Space?
+  Rating       Rating[]
 
   @@map("users")
 }
 
 model Space {
-  id            String       @id @default(uuid()) @map("id")
-  title         String       @map("title")
-  description   String       @map("description")
-  photos        String[]     @map("photos")
-  hostId        String       @unique @map("host_id")
-  host          User         @relation(fields: [hostId], references: [id])
-  amenities     Amenity[]    @relation("space_amenities")
-  rules         String       @map("rules")
+  id            String        @id @default(uuid()) @map("id")
+  title         String        @map("title")
+  description   String        @map("description")
+  photos        String[]      @map("photos")
+  hostId        String        @unique @map("host_id")
+  host          User          @relation(fields: [hostId], references: [id])
+  amenities     Amenity[]     @relation("space_amenities")
+  rules         String        @map("rules")
   address       Address?
   geoLocation   GeoLocation?
-  createdAt     DateTime     @default(now()) @map("created_at")
-  updatedAt     DateTime     @updatedAt @map("updated_at")
-  deletedAt     DateTime?    @map("deleted_at")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  deletedAt     DateTime?     @map("deleted_at")
   Rating        Rating[]
-  averageRating Float        @default(0) @map("average_rating")
+  appointments  Appointment[]
+  averageRating Float         @default(0) @map("average_rating")
 
   @@map("spaces")
 }
@@ -87,26 +88,27 @@ model Amenity {
   @@map("amenities")
 }
 
-enum BookingStatus {
+enum AppointmentStatus {
   PENDING
   CONFIRMED
   CANCELLED
 }
 
-model Booking {
-  id        String        @id @default(cuid()) @map("id")
-  userId    String        @map("user_id")
-  spaceId   String        @map("space_id")
-  date      DateTime      @map("date")
-  startTime DateTime      @map("start_time")
-  endTime   DateTime      @map("end_time")
-  status    BookingStatus @default(PENDING) @map("status")
-  createdAt DateTime      @default(now()) @map("created_at")
-  updatedAt DateTime      @updatedAt @map("updated_at")
+model Appointment {
+  id        String            @id @default(cuid()) @map("id")
+  userId    String            @map("user_id")
+  spaceId   String            @map("space_id")
+  date      DateTime          @map("date")
+  startTime DateTime          @map("start_time")
+  endTime   DateTime          @map("end_time")
+  status    AppointmentStatus @default(PENDING) @map("status")
+  createdAt DateTime          @default(now()) @map("created_at")
+  updatedAt DateTime          @updatedAt @map("updated_at")
 
-  user User @relation(fields: [userId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+  space Space @relation(fields: [spaceId], references: [id])
 
-  @@map("bookings")
+  @@map("appointments")
 }
 
 model Rating {

@@ -59,7 +59,7 @@ describe('UpdateUserUseCase', () => {
 
   it('should clear deletedAt when status changes from INACTIVE to ACTIVE', async () => {
     const user = await makeUser({ status: 'INACTIVE' as UserStatus });
-    user.delete(); // Adiciona deletedAt
+    user.delete();
     await repo.create(user);
 
     await useCase.execute({ id: user.id.toString(), status: 'ACTIVE' as UserStatus });

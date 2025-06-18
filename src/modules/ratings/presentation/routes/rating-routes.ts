@@ -20,9 +20,9 @@ import { validateParamsId } from '@/core/validators';
  */
 export const ratingRoutes = Router();
 
-ratingRoutes.post('/', validateCreateRating, createRatingController); // Cria uma nova avaliação
-ratingRoutes.put('/:id', validateParamsId, validateUpdateRating, updateRatingController); // Atualiza uma avaliação existente
-ratingRoutes.delete('/:id', validateParamsId, deleteRatingController); // Remove uma avaliação
-ratingRoutes.get('/:id', validateParamsId, findRatingByIdController); // Busca uma avaliação por ID
-ratingRoutes.get('/space/:spaceId', validateParamsId, findRatingsBySpaceIdController); // Lista avaliações de um espaço
-ratingRoutes.get('/user/:userId', validateParamsId, findRatingsByUserIdController); // Lista avaliações de um usuário 
+ratingRoutes.post('/', validateCreateRating, createRatingController);
+ratingRoutes.put('/:id', validateParamsId, validateUpdateRating, updateRatingController);
+ratingRoutes.delete('/:id', validateParamsId, deleteRatingController);
+ratingRoutes.get('/:id', validateParamsId, findRatingByIdController);
+ratingRoutes.get('/space/:spaceId', validateParamsId, findRatingsBySpaceIdController);
+ratingRoutes.get('/user/:userId', validateParamsId, findRatingsByUserIdController); 

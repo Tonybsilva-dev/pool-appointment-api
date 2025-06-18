@@ -1,13 +1,36 @@
 /**
- * @route PUT /api/ratings/:id
- * @summary Atualiza uma avaliação existente
- * @tags Ratings
- * @param {string} id.path.required - ID da avaliação
- * @param {number} score.body.optional - Nota (1 a 5)
- * @param {string} comment.body.optional - Comentário
- * @response 200 - Avaliação atualizada com sucesso
- * @response 400 - Dados inválidos
- * @response 404 - Avaliação não encontrada
+ * @swagger
+ * /ratings/{id}:
+ *   put:
+ *     summary: Atualiza uma avaliação existente
+ *     tags: [Ratings]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID da avaliação
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               score:
+ *                 type: number
+ *                 description: Nota (1 a 5)
+ *               comment:
+ *                 type: string
+ *                 description: Comentário
+ *     responses:
+ *       200:
+ *         description: Avaliação atualizada com sucesso
+ *       400:
+ *         description: Dados inválidos
+ *       404:
+ *         description: Avaliação não encontrada
  */
 // Exemplo de payload:
 // {

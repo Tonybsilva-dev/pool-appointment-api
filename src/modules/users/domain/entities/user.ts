@@ -78,6 +78,7 @@ export class User extends Entity<UserProps> {
   }
 
   delete() {
+    this.props.status = UserStatus.INACTIVE;
     this.props.deletedAt = new Date();
     this.touch();
   }
