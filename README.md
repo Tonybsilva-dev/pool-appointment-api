@@ -61,7 +61,7 @@ _For more examples, please refer to the [Documentation](#)_
 
 ## Download API
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=The%20Coffee%20Class%20App%20-%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2FAsynnc%2Fcollections%2Fmain%2Fthe-coffee-class-app.json%3Ftoken%3DGHSAT0AAAAAACBJEZJGC2O7MM7XT5CPSHRAZDCATYQ)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Pool%20Appointment%20Api&uri=https%3A%2F%2Fgithub.com%2FTonybsilva-dev%2Fpool-appointment-api%2Fblob%2Fdevelop%2Fsrc%2Fcore%2Fdocs%2Finsomnia.json)
 
 ## Roadmap
 See the [open issues](https://github.com/Tonybsilva-dev/pool-appointment-api/issues) for a list of proposed features (and known issues).
