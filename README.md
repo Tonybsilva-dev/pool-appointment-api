@@ -14,7 +14,7 @@
   <h3 align="center">Pool Appointment</h3>
 
   <p align="center">
-    Appointment Service Manager System.
+    Appointment Manager System.
     <br />ı
     <a href="#"><strong>Explore the docs »</strong></a>
     <br />
